@@ -18,21 +18,24 @@ class App extends Component {
             <a className="navbar-brand" href="http://www.lukeejohnson.com" target="_blank" rel="noopener noreferrer">
               <img src={logo} width="30" height="30" alt="lukeejohnson.com"/>
             </a>
-            <Link to="/" className="navbar-brand">Jitterate TODO App</Link>
+            <Link to="/" className="navbar-brand">Jitterate Weather</Link>
             <div className="nav-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link">Todos</Link>
+                  <Link to="/" className="nav-link">Daily</Link>
                 </li>
+                {/* <li className="navbar-item">
+                  <Link to="/create" className="nav-link">5 Day</Link>
+                </li> */}
                 <li className="navbar-item">
-                  <Link to="/create" className="nav-link">Create Todo</Link>
+                  <Link to="/edit" className="nav-link">5 Day</Link>
                 </li>
               </ul>
             </div>
           </nav>
 
           <Route path="/" exact component={TodosList} />
-          <Route path="/edit/:id" component={EditTodo} />
+          <Route path="/edit" component={EditTodo} />
           <Route path="/create" component={CreateTodo} />
         </div>
       </Router>

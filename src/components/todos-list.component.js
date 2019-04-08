@@ -1,27 +1,40 @@
 import React, {Component} from 'react';
 import '../App.css';
+import {geolocated} from 'react-geolocated';
+import sketch from './sketch';
+import P5Wrapper from 'react-p5-wrapper';
 
-export default class CurrentWeather extends Component {
+class CurrentWeather extends Component {
     constructor() {
         super();
         this.state = {
             forecast: []
         }
     }
-
+    
     componentDidMount() {
-        fetch('http://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=65804&days=10')
+        let apicall = "http://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=65802&days=5";
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log(position.coords.latitude);
+                console.log(position.coords.longitude);
+                apicall = `http://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=${position.coords.latitude},${position.coords.longitude}&days=10`;
+            });
+        } else {
+            console.log(`it didn't work`);
+        }
+        console.log(apicall);
+        fetch(apicall)
         .then(results => {
             return results.json();
         }).then(data => {
-            console.log(data);
             let forecast = data.forecast.forecastday.map((element) => {
-                console.log(element.day.condition.icon);
                 return(
-                    <div class="right-div right-text">
-                        <div class="center-text">{element.date}</div>
+                    <div className="right-div right-text">
+                        <div className="center-text">{element.date}</div>
                         <img src={element.day.condition.icon} style={{width:'100px', height:'100px'}} />
-                        <div class="center-text">{`high ${element.day.maxtemp_f}`}</div> 
+                        <P5Wrapper sketch={sketch} />
+                        <div className="center-text">{`high ${element.day.maxtemp_f}`}</div> 
                     </div>
                 )
             })
@@ -30,10 +43,15 @@ export default class CurrentWeather extends Component {
     }
 
     render() {
-        return (
-            <div class="container">
-                {this.state.forecast}
-            </div>
-        );
+        return <div key={this.state.forecast}className="container">
+                    {this.state.forecast}
+                </div>
     }
 }
+
+export default geolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  })(CurrentWeather);

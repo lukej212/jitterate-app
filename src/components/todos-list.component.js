@@ -13,12 +13,12 @@ class CurrentWeather extends Component {
     }
     
     componentDidMount() {
-        let apicall = "http://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=65802&days=5";
+        let apicall = "https://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=65802&days=5";
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 console.log(position.coords.latitude);
                 console.log(position.coords.longitude);
-                apicall = `http://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=${position.coords.latitude},${position.coords.longitude}&days=10`;
+                apicall = `https://api.apixu.com/v1/forecast.json?key=513d8003c8b348f1a2461629162106&q=${position.coords.latitude},${position.coords.longitude}&days=10`;
             });
         } else {
             console.log(`it didn't work`);

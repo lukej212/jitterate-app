@@ -34,9 +34,9 @@ class App extends Component {
             </div>
           </nav>
 
-          <Route path="/jitterate-app/" exact component={TodosList} />
-          <Route path="/jitterate-app/edit" component={EditTodo} />
-          <Route path="/jitterate-app/create" component={CreateTodo} />
+          <Route path="/" exact component={TodosList} />
+          <Route path="/edit" component={EditTodo} />
+          <Route path="/create" component={CreateTodo} />
         </div>
       </Router>
     );

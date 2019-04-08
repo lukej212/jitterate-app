@@ -1,13 +1,13 @@
 export default function sketch (p) {
-    let x = 5;
+    let x = 10;
     let y = 10;
     let xspeed = 3;
     let yspeed = 2;
 
-    let r = 5;
+    let r = 10;
   
     p.setup = function () {
-      p.createCanvas(100, 100);
+      p.createCanvas(200, 200);
     };
   
     // p.myCustomRedrawAccordingToNewPropsHandler = function (props) {

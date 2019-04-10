@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {Navbar, Nav, Button, Form, FormControl} from 'react-bootstrap';
 
 import CreateTodo from "./components/create-todo.component";
-import EditTodo from "./components/edit-todo.component";
-import TodosList from "./components/todos-list.component";
+import FiveDay from "./components/five-day-forecast";
+import CurrentWeather from "./components/current-weather";
+import CitySearch from './components/search-component';
 
 import logo from "./logo.png";
 
@@ -12,32 +14,16 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
-
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="http://www.lukeejohnson.com" target="_blank" rel="noopener noreferrer">
-              <img src={logo} width="30" height="30" alt="lukeejohnson.com"/>
-            </a>
-            <Link to="/" className="navbar-brand">Jitterate Weather</Link>
-            <div className="nav-collapse">
-              <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                  <Link to="/" className="nav-link">Daily</Link>
-                </li>
-                {/* <li className="navbar-item">
-                  <Link to="/create" className="nav-link">5 Day</Link>
-                </li> */}
-                <li className="navbar-item">
-                  <Link to="/edit" className="nav-link">5 Day</Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
-
-          <Route path="/jitterate-app/" exact component={TodosList} />
-          <Route path="/jitterate-app/edit" component={EditTodo} />
-          <Route path="/jitterate-app/create" component={CreateTodo} />
-        </div>
+          <Navbar bg="dark" variant="dark">
+            <Navbar.Brand href="/">Jitterate</Navbar.Brand>
+            <Nav className="mr-auto">
+              <Nav.Link href="/">Current</Nav.Link>
+              <Nav.Link href="/edit">5 Day</Nav.Link>
+            </Nav>
+            <CitySearch></CitySearch>
+          </Navbar>
+          <Route path="/" exact component={CurrentWeather} />
+          <Route path="/edit" component={FiveDay}/>
       </Router>
     );
   }

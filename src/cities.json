@@ -1,0 +1,48 @@
+
+[
+    {
+        "city": "Ontario", 
+        "growth_from_2000_to_2013": "5.5%", 
+        "latitude": 34.0633443, 
+        "longitude": -117.6508876, 
+        "population": "167500", 
+        "rank": "144", 
+        "state": "California"
+    }, 
+    {
+        "city": "Vancouver", 
+        "growth_from_2000_to_2013": "14.2%", 
+        "latitude": 45.6387281, 
+        "longitude": -122.6614861, 
+        "population": "167405", 
+        "rank": "145", 
+        "state": "Washington"
+    }, 
+    {
+        "city": "Cape Coral", 
+        "growth_from_2000_to_2013": "60.4%", 
+        "latitude": 26.5628537, 
+        "longitude": -81.9495331, 
+        "population": "165831", 
+        "rank": "146", 
+        "state": "Florida"
+    }, 
+    {
+        "city": "Sioux Falls", 
+        "growth_from_2000_to_2013": "31.1%", 
+        "latitude": 43.5445959, 
+        "longitude": -96.73110340000001, 
+        "population": "164676", 
+        "rank": "147", 
+        "state": "South Dakota"
+    }, 
+    {
+        "city": "Springfield", 
+        "growth_from_2000_to_2013": "7.8%", 
+        "latitude": 37.2089572, 
+        "longitude": -93.29229889999999, 
+        "population": "164122", 
+        "rank": "148", 
+        "state": "Missouri"
+    }
+]

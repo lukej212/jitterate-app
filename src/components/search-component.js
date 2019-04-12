@@ -22,12 +22,6 @@ export default class CitySearch extends Component {
     handleSubmit(event) {
       alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
-      // fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${GOOG_KEY}`)
-      //   .then.then(results => {
-      //     return results.json();
-      // }).then(data => {
-      //   console.log(data);
-      // })
     }
   
     render() {

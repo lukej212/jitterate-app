@@ -7,14 +7,8 @@ export default function sketch (p) {
     let r = 10;
   
     p.setup = function () {
-      p.createCanvas(200, 200);
+      p.createCanvas(226, 204);
     };
-  
-    // p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    //   if (props.rotation){
-    //     rotation = props.rotation * Math.PI / 180;
-    //   }
-    // };
   
     p.draw = function () {
       p.background(0);

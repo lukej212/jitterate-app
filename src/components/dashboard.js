@@ -7,7 +7,7 @@ import states from '../states'
 import P5Wrapper from 'react-p5-wrapper';
 import {Card, Nav, Button, Form, FormControl} from 'react-bootstrap';
 
-export default class FiveDay extends Component {
+export default class Dashboard extends Component {
     constructor() {
         super();
         this.state = {
@@ -24,6 +24,7 @@ export default class FiveDay extends Component {
         }
     }
     
+    
     componentDidMount() {
         let cardsAry = [];
         cities.forEach(city => {
@@ -35,6 +36,7 @@ export default class FiveDay extends Component {
                 console.log(data)
                 let abbrev = this.getAbbrev(city.state);
                 cardsAry.push(
+                    <a href="/">
                     <Card className="right-div right-text" style={{ width: '18rem' }}>
                         <P5Wrapper class="center-block" variant="top" sketch={sketch} />
                         <Card.Body>
@@ -51,9 +53,10 @@ export default class FiveDay extends Component {
                                 <div>{`Low: ${data.forecast.forecastday[0].day.mintemp_f}`}&#176;F</div>
                                 <div>{`High: ${data.forecast.forecastday[0].day.maxtemp_f}`}&#176;F</div>
                             </Card.Text>
-                            <Button variant="primary">5 Day Forecast</Button>
+                            {/* <Button variant="primary">5 Day Forecast</Button> */}
                         </Card.Body>
                     </Card>
+                    </a>
                 )
                 this.setState({cityCards: cardsAry});
             });
@@ -66,13 +69,13 @@ export default class FiveDay extends Component {
                 <div className="container">
                     {this.state.cityCards}
                 </div>
-                <Button className="center-block" variant="secondary" size="sm">
+                {/* <Button className="center-block" variant="secondary" size="sm">
                     Add city
                 </Button>
-                <Button className="btn btn-default btn-circle btn-lg">
+                <Button className="center btn btn-default btn-circle btn-lg">
                     <i className="fa fa-check">
                     </i>
-                </Button>
+                </Button> */}
             </div>
         )
     }

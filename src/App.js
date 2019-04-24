@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Navbar, Nav, Button, Form, FormControl} from 'react-bootstrap';
 
-import Dashboard from "./components/dashboard";
 import CurrentWeather from "./components/current-weather";
-import CitySearch from './components/search-component';
-
+import Forecast from "./components/forecast";
 
 class App extends Component {
   render() {
@@ -16,11 +14,11 @@ class App extends Component {
             <Navbar.Brand href="/">Jitterate</Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link href="/">Current</Nav.Link>
-              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+              <Nav.Link href="/forecast">Forecast</Nav.Link>
             </Nav>
           </Navbar>
           <Route path="/" exact component={CurrentWeather} />
-          <Route path="/dashboard" component={Dashboard}/>
+          <Route path="/forecast" component={Forecast}/>
       </Router>
     );
   }

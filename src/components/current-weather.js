@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
+import sketchVars from '../sketchVars.json';
 import P5Wrapper from 'react-p5-wrapper';
 import {Card} from 'react-bootstrap';
 import sketch from '../sketches/sketch';
@@ -23,7 +24,6 @@ export default class CurrentWeather extends Component {
             return results.json();
         })
         .then(data => {
-            console.log(data);
             location =  data.plus_code.compound_code;
         });
         return location;
@@ -37,38 +37,41 @@ export default class CurrentWeather extends Component {
                     return results.json();
                 })
                 .then(data => {
-                    console.log(data);
                     resolve(data.plus_code.compound_code.slice(7));
                 });
               }, 300);
         });
         location.then((locationName) => {
-
             fetch(apicall)
             .then(results => {
                 return results.json();
             })
             .then(data => {
-                console.log(this.getLocation(lat, long));
+                sketchVars.wind_dir = data.current.wind_dir;
+                sketchVars.wind_mph = data.current.wind_mph;
+                sketchVars.humidity = data.current.humidity;
+                console.log(sketchVars.wind_dir);
+                console.log(sketchVars.wind_mph);
+                console.log(sketchVars.humidity);
                 let forecast = (
                     <Card className="right-div right-text" style={{ width: '18rem' }}>
                         <P5Wrapper class="center-block" variant="top" sketch={sketch} />
                         <Card.Body>
                             <Card.Title>{locationName}</Card.Title>
-                            <Card.Text>
+                            <div>
                                 <div>{data.current.condition.text}</div>
                                 <div>{data.current.temp_f}&#176;F</div>
-                            </Card.Text>
-                            <Card.Text>
+                            </div>
+                            <div>
                                 <div>{`Wind: ${data.current.wind_mph} mph`}</div>
                                 <div>{`Humidity: ${data.current.humidity} %`}</div>
-                            </Card.Text>
-                            <Card.Text>
+                            </div>
+                            <div>
                                 <div>{`Low: ${data.forecast.forecastday[0].day.mintemp_f}`}&#176;F</div>
                                 <div>{`High: ${data.forecast.forecastday[0].day.maxtemp_f}`}&#176;F</div>
-                            </Card.Text>
-                            <Card.Text>
-                            </Card.Text>
+                            </div>
+                            <div>
+                            </div>
                         </Card.Body>
                     </Card>
                 )

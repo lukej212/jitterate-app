@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
 import P5Wrapper from 'react-p5-wrapper';
-import {Card} from 'react-bootstrap';
+import {Card, Image} from 'react-bootstrap';
 import sketch from '../sketches/sketch';
 import config from '../config.json';
 const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?days=5&key=${config.WEATHER_KEY}&q=`;
@@ -23,11 +23,10 @@ export default class Forecast extends Component {
             return results.json();
             })
             .then(data => {
-                console.log(data);
             let forecast =  data.forecast.forecastday.map((element, index) => {
-                let dayOfWeek = dayNum + index <= 6 ? this.weekdays[dayNum + index] : this.weekdays[0];
+                let dayOfWeek = dayNum + index <= 6 ? this.weekdays[dayNum + index] : this.weekdays[Math.abs(dayNum - index -1)];
                 return(
-                    <Card className="right-div right-text" style={{ width: '18rem' }}>
+                    <Card key={index} className="right-div right-text" style={{ width: '18rem' }}>
                     <P5Wrapper class="center-block" variant="top" sketch={sketch} />
                     <Card.Body>
                         <Card.Title>{dayOfWeek}</Card.Title>
@@ -42,8 +41,6 @@ export default class Forecast extends Component {
                             <div>{`Low: ${element.day.mintemp_f}`}&#176;F</div>
                             <div>{`High: ${element.day.maxtemp_f}`}&#176;F</div>
                         </Card.Text>
-                        <Card.Text>
-                        </Card.Text>
                     </Card.Body>
                 </Card>
                 )
@@ -57,7 +54,6 @@ export default class Forecast extends Component {
             navigator.geolocation.getCurrentPosition((position) => {
                 let lat = position.coords.latitude;
                 let long = position.coords.longitude;
-                console.log(`${lat},${long}`);
                 this.getWeather(`${ROOT_ADDRESS}${lat},${long}`);
             });
         } else {

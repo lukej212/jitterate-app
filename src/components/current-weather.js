@@ -5,8 +5,8 @@ import P5Wrapper from 'react-p5-wrapper';
 import {Card} from 'react-bootstrap';
 import sketch from '../sketches/sketch';
 import config from '../config.json';
-const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?key=${config.WEATHER_KEY}&q=`;
-const GOOG_ADDRESS = `https://maps.googleapis.com/maps/api/geocode/json?key=${config.GOOG_KEY}&latlng=`;
+const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?key=${process.env.WEATHER_KEY}&q=`;
+const GOOG_ADDRESS = `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOG_KEY}&latlng=`;
 
 export default class CurrentWeather extends Component {
     constructor() {

@@ -3,8 +3,7 @@ import '../App.css';
 import P5Wrapper from 'react-p5-wrapper';
 import {Card, Image} from 'react-bootstrap';
 import sketch from '../sketches/sketch';
-import config from '../config.json';
-const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?days=5&key=${config.WEATHER_KEY}&q=`;
+const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?days=5&key=${process.env.WEATHER_KEY}&q=`;
 
 export default class Forecast extends Component {
     constructor() {

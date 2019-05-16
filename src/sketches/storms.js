@@ -9,10 +9,8 @@ export default function storms (p) {
     let fname = [sun,cloud,lightning,sun2,background];
     let imgS = []; 
     let alt = 0, weatherID= 5, month = 1, day = 1, temp= 32;
-    let s;
-
+    
     p.setup = function () {
-    //Don't change setup()
         p.createCanvas(204, 230);
         for(let i = 0; i< fname.length; i++){
             imgS[i] = p.loadImage(fname[i]);
@@ -20,19 +18,15 @@ export default function storms (p) {
         for(let i = 0; i<fname.length-1;i++){
             imgS[i].resize(100,100);
         }
-        
-        s = p.textFont("ISOCPEUR", 40);
-        
-        p.textAlign(p.LEFT, p.CENTER);
     };
 
     p.draw = function () {
         p.background(127, 156, 178);
         sAnim(2,2,weatherID,month,day,temp,alt);
         
-        if(alt == 1) alt = 0;
+        if(alt === 1) alt = 0;
         else alt = 1;
-        p.frameRate(3);
+        p.frameRate((Math.random() * 3.5) + 2);
     };
 
     //wID: 1 = sunny, 2 = cloudy, 3 = rain, 4 = partly cloudy, 5 = storms
@@ -40,29 +34,28 @@ export default function storms (p) {
     let sAnim = function (x, y, wID, m , d , t , a) {
         // x coord, ycoord, weather ID, month, day, temp, alt variable. 
         //tbox for date
-        p.image(imgS[4],x,y);
+        p.image(imgS[4],0,y);
         //p.textFont(s);
         //p.stroke(255,255,153);
         //let txt = m + "/" + d ;
         //p.text(txt, x + 20, y + 30);
         
         //alternating lines for rain if rainy weather
-        if (wID == 3 || wID == 5){
-            for (let i = 0; i< 5;i++){
-            let c = p.color(Math.floor(Math.random(120,255))); 
-            p.stroke(c);
+        if (wID === 3 || wID === 5){
+            for (let i = 0; i<6;i++){
+            p.stroke(Math.floor(Math.random() * 255) + 120);
             p.strokeWeight(2);
             p.line(x+80+i*10,y+140,x+70+i*10,y+190);
             }    
         }
         //sets image for weather. 2 img for partly cloudy, stormy
-        if(wID==5){
-            if(a==1)p.image(imgS[2],x+20+Math.random(0,50),y+100);
+        if(wID===5){
+            if(a===1)p.image(imgS[2],x+20+Math.floor(Math.random() * 50) + 0,y+100);
         }
-        if(wID==1) if(a==0){p.image(imgS[0],x+50,y+60);}else{p.image(imgS[3],x+50,y+60);}
-        if(wID==2) p.image(imgS[1],x+50,y+60+a*5);
-        if(wID==3|| wID==5) p.image(imgS[1],x+50,y+60+a*5);
-        if(wID==4){
+        if(wID===1) if(a===0){p.image(imgS[0],x+50,y+60);}else{p.image(imgS[3],x+50,y+60);}
+        if(wID===2) p.image(imgS[1],x+50,y+60+a*5);
+        if(wID===3|| wID===5) p.image(imgS[1],x+40,y+30+a*5);
+        if(wID===4){
             p.image(imgS[0],x+35,y+45);
             p.image(imgS[1],x+60,y+60+a*5);
         }

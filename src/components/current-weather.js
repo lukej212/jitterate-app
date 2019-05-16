@@ -53,9 +53,6 @@ export default class CurrentWeather extends Component {
                 sketchVars.wind_dir = data.current.wind_dir;
                 sketchVars.wind_mph = data.current.wind_mph;
                 sketchVars.humidity = data.current.humidity;
-                console.log(sketchVars.wind_dir);
-                console.log(sketchVars.wind_mph);
-                console.log(sketchVars.humidity);
                 let weathercode = data.current.condition.code;
                 let weatherAnim;
                 if(weathercode === 1000)
@@ -74,19 +71,17 @@ export default class CurrentWeather extends Component {
                         {weatherAnim}
                         <Card.Body>
                             <Card.Title>{locationName}</Card.Title>
-                            <div>
+                            <div className="bottom-space">
+                                <Card.Title>{data.current.temp_f}&#176;F</Card.Title>
                                 <div>{data.current.condition.text}</div>
-                                <div>{data.current.temp_f}&#176;F</div>
                             </div>
-                            <div>
+                            <div className="bottom-space">
                                 <div>{`Wind: ${data.current.wind_mph} mph`}</div>
                                 <div>{`Humidity: ${data.current.humidity} %`}</div>
                             </div>
-                            <div>
+                            <div className="bottom-space">
                                 <div>{`Low: ${data.forecast.forecastday[0].day.mintemp_f}`}&#176;F</div>
                                 <div>{`High: ${data.forecast.forecastday[0].day.maxtemp_f}`}&#176;F</div>
-                            </div>
-                            <div>
                             </div>
                         </Card.Body>
                     </Card>

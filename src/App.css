@@ -29,6 +29,14 @@
   color: white;
 }
 
+.p5-image {
+    padding-left: 10px
+}
+
+.bottom-space {
+    padding-bottom: 10px
+}
+
 .App-link {
   color: #61dafb;
 }

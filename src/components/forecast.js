@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import '../App.css';
 import P5Wrapper from 'react-p5-wrapper';
-import {Card, Image} from 'react-bootstrap';
-import sketch from '../sketches/weatherSketch';
+import {Card} from 'react-bootstrap';
 import rain from '../sketches/rain';
 import sunny from '../sketches/sunny';
 import cloudy from '../sketches/cloudy';
 import pcloudy from '../sketches/pcloudy';
 import storms from '../sketches/storms';
-const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?days=5&key=5354360a83f54cd69d2163637190104&q=`;
+const ROOT_ADDRESS = `https://api.apixu.com/v1/forecast.json?days=6&key=5354360a83f54cd69d2163637190104&q=`;
 
 export default class Forecast extends Component {
     constructor() {
@@ -17,18 +16,18 @@ export default class Forecast extends Component {
             forecast: []
         }
         this.getWeather = this.getWeather.bind(this);
-        this.weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        this.weekdays = ["Empty", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     }
 
     getWeather(apicall) {
-        let dayNum = new Date().getDay();
         fetch(apicall)
         .then(results => {
             return results.json();
             })
             .then(data => {
             let forecast =  data.forecast.forecastday.map((element, index) => {
-                let dayOfWeek = dayNum + index <= 6 ? this.weekdays[dayNum + index] : this.weekdays[Math.abs(dayNum - index -1)];
+                let dayNum = new Date(element.date).getDay()+1;
+                let date = new Date(element.date);
                 let weathercode = element.day.condition.code;
                 let weatherAnim;
                 if(weathercode === 1000)
@@ -44,22 +43,22 @@ export default class Forecast extends Component {
                     weatherAnim = <P5Wrapper class="center-block" variant="top" sketch={rain} />
                 return(
                     <Card key={index} className="right-div right-text" style={{ width: '18rem' }}>
-                    {weatherAnim}
-                    <Card.Body>
-                        <Card.Title>{dayOfWeek}</Card.Title>
-                        <Card.Text>
-                            <div>{element.day.condition.text}</div>
-                        </Card.Text>
-                        <Card.Text>
-                            <div>{`Sunrise: ${element.astro.sunrise}`}</div>
-                            <div>{`Sunset: ${element.astro.sunset}`}</div>
-                        </Card.Text>
-                        <Card.Text>
-                            <div>{`Low: ${element.day.mintemp_f}`}&#176;F</div>
-                            <div>{`High: ${element.day.maxtemp_f}`}&#176;F</div>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                        {weatherAnim}
+                        <Card.Body>
+                            <Card.Title>{`${this.weekdays[dayNum]} ${date.getMonth() + 1}/${date.getDate() + 1}`}</Card.Title>
+                            <div className="bottom-space">
+                                <div>{element.day.condition.text}</div>
+                            </div>
+                            <div className="bottom-space">
+                                <div>{`Sunrise: ${element.astro.sunrise}`}</div>
+                                <div>{`Sunset: ${element.astro.sunset}`}</div>
+                            </div>
+                            <div className="bottom-space">
+                                <div>{`Low: ${element.day.mintemp_f}`}&#176;F</div>
+                                <div>{`High: ${element.day.maxtemp_f}`}&#176;F</div>
+                            </div>
+                        </Card.Body>
+                    </Card>
                 )
             })
             this.setState({forecast: forecast});
